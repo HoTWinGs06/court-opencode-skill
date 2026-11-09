@@ -14,8 +14,8 @@ metadata:
   homepage: "https://chen.media"
   source: "https://github.com/alexyc9381/court-skill"
   version: "1.1.0-crouton-adapted"
-  adapted_by: "Crouton Alpha for local use (OpenCode + Claude Code compatible)"
-  adapted_for: "OpenCode / Claude Code - model-agnostic, no vendor lock-in"
+  adapted_by: "Crouton Alpha for local use (OpenCode)"
+  adapted_for: "OpenCode - model-agnostic, no vendor lock-in"
 ---
 
 # court
@@ -37,9 +37,10 @@ plan or claim the user most recently wanted an opinion on.
 Every piece of bookkeeping goes through `court.py` in this skill's folder:
 
 ```bash
-python3 "${CLAUDE_SKILL_DIR}/court.py" <command>
+# <skill-dir> is the base directory printed after loading the skill
+python3 "<skill-dir>/court.py" <command>
 # on Windows, python3 may be just: python
-python "${CLAUDE_SKILL_DIR}/court.py" <command>
+python "<skill-dir>/court.py" <command>
 ```
 
 Below, `COURT` means exactly that command. If the path looks unexpanded, use the "Base directory for
@@ -61,9 +62,7 @@ Run `COURT plan` with the same flags and tell the user in one line how big the t
 "12 jurors, 17 sub-agent calls", then start. If this skill fired on its own (the user never asked for
 a trial), ask once first and offer `--quick`.
 
-Sub-agents write into `.court/` in the current directory. In the default permission mode that is one
-approval per file. Suggest accept-edits mode (Shift+Tab in Claude Code) for the trial. Do not change the user's
-settings yourself.
+Sub-agents write into `.court/` in the current directory. In OpenCode default permissions this may prompt per file; suggest approving or using an auto-approve permission setup for the trial. Do not change the user's settings yourself.
 
 ## Step 2: write the case file
 
@@ -92,9 +91,7 @@ Every phase works the same way:
 
 1. `COURT prompts <phase>` writes one brief per job and lists the jobs still to run, in waves.
 2. Launch **one wave at a time**: a single message with one subagent call per job in that wave.
-   Tool mapping (exact tool names vary by harness):
-   - Claude Code: Agent tool (Task in older versions), `subagent_type: general-purpose`, `description: "court <job id>"`
-   - OpenCode / Crouton Alpha: `subagent` tool, `agent: general`, `description: "court <job id>"`
+   - OpenCode: use the `task` subagent tool with a general agent, `description="court <job id>"`
 
    Each call is:
    - `prompt`: `Read <brief path> and follow it exactly. It is your whole brief.`

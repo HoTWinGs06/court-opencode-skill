@@ -5,10 +5,10 @@ Put your idea on trial in front of a jury of 12 independent AI reviewers. A pros
 **Upstream original:** [alexyc9381/court-skill](https://github.com/alexyc9381/court-skill) by Alex Chen [@nocodealex](https://instagram.com/nocodealex). This repo is an adaptation for OpenCode (model-agnostic jury wording, `.opencode/skills/court` layout with `scripts/` + `references/`). Logic, prompts, `court.py` bookkeeping, and MIT license unchanged.
 
 ## What changed vs upstream
-- Jury renamed from vendor-specific to "independent AI reviewers" - works on any model (OpenCode, Claude Code, etc.), no false provenance.
+- Jury renamed from vendor-specific to "independent AI reviewers" - works on any model (OpenCode, etc.), no false provenance.
 - OpenCode-native layout: `.opencode/skills/court/SKILL.md` + `scripts/court.py` + `references/jurors.json`, plus `court.py`/`jurors.json` beside `SKILL.md` for relative-path compat.
-- SKILL.md `The tool` section updated to OpenCode base-directory + `skill` tool (`id="court"`), not Claude-specific env vars.
-- Compat copies kept at `.agents/skills/court/` and `.claude/skills/court/` (OpenCode auto-discovers these too).
+- SKILL.md `The tool` section updated to OpenCode base-directory + `skill` tool (`id="court"`).
+- Compat copy kept at `.agents/skills/court/` (OpenCode auto-discovers this too).
 
 ## Install
 
@@ -26,7 +26,7 @@ Or add to `opencode.jsonc`:
 { "skills": ["./.opencode/skills"] }
 ```
 
-**Compatibility locations** (also auto-discovered by OpenCode): `.agents/skills/court/`, `.claude/skills/court/` / `~/.agents/skills/court/` / `~/.claude/skills/court/`.
+**Compatibility location** (also auto-discovered by OpenCode): `.agents/skills/court/` / `~/.agents/skills/court/`.
 
 ## Use
 

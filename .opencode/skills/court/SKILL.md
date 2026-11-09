@@ -85,7 +85,6 @@ Every phase works the same way:
 1. `COURT prompts <phase>` writes one brief per job and lists the jobs still to run, in waves.
 2. Launch **one wave at a time**: a single message with one subagent call per job in that wave.
    - OpenCode: use the `task` subagent tool with a general agent, `description="court <job id>"`
-   - Claude Code compat: Agent (Task) tool, `subagent_type=general-purpose`
 
    Each call prompt is:
    - `Read <brief path> and follow it exactly. It is your whole brief.`
